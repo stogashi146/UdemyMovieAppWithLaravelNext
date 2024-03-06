@@ -17,7 +17,7 @@ export default function Home() {
                         <Link
                             href="/dashboard"
                             className="ml-4 text-sm text-gray-700 underline">
-                            Dashboard
+                            HOME
                         </Link>
                     ) : (
                         <>

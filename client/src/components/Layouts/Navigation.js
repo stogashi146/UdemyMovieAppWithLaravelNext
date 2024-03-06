@@ -34,7 +34,7 @@ const Navigation = ({ user }) => {
                         <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                             <NavLink
                                 href="/dashboard"
-                                active={router.pathname === '/dashboard'}>
+                                active={router.pathname === '/home'}>
                                 Dashboard
                             </NavLink>
                         </div>
