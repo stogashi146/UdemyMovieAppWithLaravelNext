@@ -9,7 +9,7 @@ async function handler(req, res) {
     console.log('取得した結果は。。。', response.data)
   } catch (error) {
     console.log(error)
-    res.status(500).json('エラー発生しました', error)
+    res.status(500).json({ message: 'エラー発生しました' })
   }
 }
 
