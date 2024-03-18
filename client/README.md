@@ -54,15 +54,15 @@ This Next.js application contains a custom `useAuth` React hook, designed to abs
 
 ```js
 const ExamplePage = () => {
-    const { logout, user } = useAuth({ middleware: 'auth' })
+  const { logout, user } = useAuth({ middleware: 'auth' })
 
-    return (
-        <>
-            <p>{user?.name}</p>
+  return (
+    <>
+      <p>{user?.name}</p>
 
-            <button onClick={logout}>Sign out</button>
-        </>
-    )
+      <button onClick={logout}>Sign out</button>
+    </>
+  )
 }
 
 export default ExamplePage
@@ -89,3 +89,10 @@ Please review [our security policy](https://github.com/laravel/breeze-next/secur
 ## License
 
 Laravel Breeze Next is open-sourced software licensed under the [MIT license](LICENSE.md).
+
+## 起動コマンド
+
+フロント
+`npm run dev`
+サーバー
+`php artisan serve`
