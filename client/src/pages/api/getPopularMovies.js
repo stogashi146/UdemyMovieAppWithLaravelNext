@@ -1,4 +1,4 @@
-import axios from '@/lib/axios'
+import axios from '@/lib/laravelAxios'
 
 async function handler(req, res) {
   try {

@@ -6,13 +6,14 @@ import React, { useEffect, useState } from 'react'
 import Layout from '@/components/Layouts/Layout'
 import SideBar from '@/components/SideBar'
 import MediaCard from '@/components/MediaCard'
-import { Grid } from '@mui/material'
+import { Grid, Typography } from '@mui/material'
 
 const search = () => {
   const [category, setCategory] = useState('all')
   const [results, setResults] = useState([])
   const router = useRouter()
   const { query: searchQuery } = router.query
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     if (!searchQuery) {
@@ -32,6 +33,8 @@ const search = () => {
         console.log(validResults)
       } catch (error) {
         console.log(error)
+      } finally {
+        setLoading(false)
       }
     }
     fetchMedia()
@@ -55,11 +58,21 @@ const search = () => {
         <title>Laravel - Search</title>
       </Head>
       <Layout sidebar={<SideBar setCategory={setCategory} />}>
-        <Grid container spacing={3}>
-          {filterdResults.map(media => (
-            <MediaCard item={media} />
-          ))}
-        </Grid>
+        {loading ? (
+          <Grid item textAlign={'center'} xs={12}>
+            <Typography>検索中...</Typography>
+          </Grid>
+        ) : filterdResults.length > 0 ? (
+          <Grid container spacing={3}>
+            {filterdResults.map(media => (
+              <MediaCard item={media} key={media.id} />
+            ))}
+          </Grid>
+        ) : (
+          <Grid item textAlign={'center'} xs={12}>
+            <Typography>検索結果が見つかりませんでした</Typography>
+          </Grid>
+        )}
       </Layout>
     </AppLayout>
   )

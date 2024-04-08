@@ -7,6 +7,7 @@ import {
   CardContent,
   Grid,
 } from '@mui/material'
+import Link from 'next/link'
 
 const MediaCard = ({ item }) => {
   const imagePath = item.poster_path
@@ -16,19 +17,21 @@ const MediaCard = ({ item }) => {
     <Grid item xs={12} sm={6} md={4} lg={3}>
       <Card>
         <CardActionArea>
-          <CardMedia
-            component={'img'}
-            sx={{ aspectRatio: '2/3' }}
-            image={imagePath}
-          />
-          <CardContent>
-            <Typography variant="h6" component={'div'} noWrap>
-              {item.title || item.name}
-            </Typography>
-            <Typography variant="subtitle1" color="textSecondary">
-              {item.release_date || item.first_air_date}
-            </Typography>
-          </CardContent>
+          <Link href={`/detail/${item.media_type}/${item.id}`}>
+            <CardMedia
+              component={'img'}
+              sx={{ aspectRatio: '2/3' }}
+              image={imagePath}
+            />
+            <CardContent>
+              <Typography variant="h6" component={'div'} noWrap>
+                {item.title || item.name}
+              </Typography>
+              <Typography variant="subtitle1" color="textSecondary">
+                {item.release_date || item.first_air_date}
+              </Typography>
+            </CardContent>
+          </Link>
         </CardActionArea>
       </Card>
     </Grid>

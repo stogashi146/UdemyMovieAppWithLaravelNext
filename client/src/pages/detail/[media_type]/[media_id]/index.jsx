@@ -1,10 +1,10 @@
-import axios from '@/lib/axios'
+import axios from '@/lib/laravelAxios'
 import React from 'react'
 import { Box, Container, Grid, Typography } from '@mui/material'
 import AppLayout from '@/components/Layouts/AppLayout'
 import Head from 'next/head'
 
-const Detail = ({ detail }) => {
+const Detail = ({ detail, media_type }) => {
   // console.log(detail)
   return (
     <AppLayout
@@ -60,10 +60,14 @@ const Detail = ({ detail }) => {
             </Grid>
             <Grid md={8} sx={{}}>
               <Typography variant="h4" paragraph>
-                {detail.title}
+                {detail.title || detail.name}
               </Typography>
               <Typography paragraph>{detail.overview}</Typography>
-              <Typography variant="h6">公開日:{detail.release_date}</Typography>
+              <Typography variant="h6">
+                {media_type == 'movie'
+                  ? `公開日：${detail.release_date}`
+                  : `初回放送日：${detail.first_air_date}`}
+              </Typography>
             </Grid>
           </Grid>
         </Container>
@@ -90,7 +94,7 @@ export async function getServerSideProps(context) {
     }
 
     return {
-      props: { detail: combinedData },
+      props: { detail: combinedData, media_type: media_type, media_id },
     }
   } catch {
     return { notFound: true }
