@@ -76,3 +76,8 @@ composer require laravel/breeze --dev
 
 API モードで動作させる
 php artisan breeze:install api
+
+## コマンドメモ
+
+MVC 作成
+`php artisan make:model Review -mcr`
