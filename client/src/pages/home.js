@@ -74,7 +74,6 @@ const Home = () => {
             </Link>
           </SwiperSlide>
         ))}
-        <Button variant="contained">押す</Button>
       </Swiper>
       <div className="py-12">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
