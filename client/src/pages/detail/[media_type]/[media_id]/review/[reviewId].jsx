@@ -57,7 +57,9 @@ const ReviewDetail = () => {
       const newCommnet = response.data
       setComments([...comments, newCommnet])
       setContent('')
-    } catch (error) {}
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
@@ -129,7 +131,7 @@ const ReviewDetail = () => {
                 </Button>
               </Box>
 
-              <CommentList comments={comments} />
+              <CommentList comments={comments} setComments={setComments} />
             </>
           ) : (
             <div>Loading...</div>

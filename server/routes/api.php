@@ -30,3 +30,4 @@ Route::put('/review/{review}', [ReviewController::class, 'update']);
 Route::get('/review/{review}', [ReviewController::class, 'show']);
 
 Route::post('/comments', [CommentController::class, 'store']);
+Route::delete('/comments/{comment}', [CommentController::class, 'destroy']);
