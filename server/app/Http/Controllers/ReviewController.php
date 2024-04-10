@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Review;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReviewController extends Controller
 {
@@ -12,7 +13,7 @@ class ReviewController extends Controller
      */
     public function index($media_type, $media_id)
     {
-        $reviews = Review::with('users')
+        $reviews = Review::with('user')
         ->where('media_type', $media_type)
         ->where('media_id', $media_id)
         ->get();
@@ -25,7 +26,6 @@ class ReviewController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -33,7 +33,25 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $validateData = $request->validate([
+        "content" => 'required|string',
+        "rating" => 'required|integer',
+        "media_type" => 'required|string',
+        "media_id" => 'required|integer',
+      ]);
+      
+
+      $review = Review::create([
+        // "user_id" => Auth::id(),
+        "user_id" => 1,
+        "content" => $validateData["content"],
+        "rating" => $validateData["rating"],
+        "media_type" => $validateData["media_type"],
+        "media_id" => $validateData["media_id"]
+      ]);
+      $review->load('user');
+
+      return response()->json($review);
     }
 
     /**
@@ -57,7 +75,17 @@ class ReviewController extends Controller
      */
     public function update(Request $request, Review $review)
     {
-        //
+        $validateData = $request->validate([
+          "content" => 'required|string',
+          "rating" => 'required|integer',
+        ]);
+
+        $review->update([
+          "content" => $validateData["content"],
+          "rating" => $validateData["rating"]
+        ]);
+
+        return response()->json($review);
     }
 
     /**
@@ -65,6 +93,9 @@ class ReviewController extends Controller
      */
     public function destroy(Review $review)
     {
-        //
+      // ルートモデルバインディングで、find＝＞deleteとせずとも削除できる
+        $review->delete();
+
+        return response()->json(["message" => "正常にレビューを削除しました"]);
     }
 }
